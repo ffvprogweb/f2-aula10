@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fatec.sigvs.model.Produto;
 import com.fatec.sigvs.service.IProdutoServico;
 
+/**
+ * CRUD de Produto
+ */
 @CrossOrigin("*") // desabilita o cors do spring security
 @RestController
 @RequestMapping("/api/v1/produtos")
