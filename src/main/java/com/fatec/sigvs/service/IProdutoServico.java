@@ -6,11 +6,8 @@ import java.util.Optional;
 import com.fatec.sigvs.model.Produto;
 
 public interface IProdutoServico {
-    public List<Produto> consultaCatalogo();
 
     public List<Produto> consultaProduto();
-
-    public List<Produto> consultaPorDescricao(String descricao);
 
     public Optional<Produto> cadastrar(Produto produto);
 
@@ -19,4 +16,7 @@ public interface IProdutoServico {
     public Optional<Produto> atualizar(Long id, Produto produto);
 
     public void excluir(String id);
+
+    public Double estoqueImobilizado();
+
 }

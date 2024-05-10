@@ -7,7 +7,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fatec.sigvs.model.IProdutoRepository;
 import com.fatec.sigvs.model.Produto;
 
 @Service
@@ -16,21 +15,9 @@ public class ProdutoServico implements IProdutoServico {
     @Autowired
     IProdutoRepository produtoRepository;
 
-    @Override
-    public List<Produto> consultaCatalogo() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
     public List<Produto> consultaProduto() {
         List<Produto> listaDeProdutos = produtoRepository.findAll();
         return listaDeProdutos;
-    }
-
-    @Override
-    public List<Produto> consultaPorDescricao(String descricao) {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     @Override
@@ -53,8 +40,8 @@ public class ProdutoServico implements IProdutoServico {
                 .orElseThrow(() -> new IllegalArgumentException("Produto não cadastrado"));
         produto.setDescricao(produtoAtualizado.getDescricao());
         produto.setCategoria(produtoAtualizado.getCategoria());
-        produto.setQuantidadeNoEstoque(produtoAtualizado.getQuantidadeNoEstoque());
-        produto.setCusto(produtoAtualizado.getCusto());
+        produto.setQuantidadeNoEstoque(String.valueOf(produtoAtualizado.getQuantidadeNoEstoque()));
+        produto.setCusto(Double.toString(produtoAtualizado.getCusto()));
         return Optional.ofNullable(produtoRepository.save(produto));
     }
 
@@ -62,5 +49,11 @@ public class ProdutoServico implements IProdutoServico {
     public void excluir(String id) {
         long codProduto = Long.parseLong(id);
         produtoRepository.deleteById(codProduto);
+    }
+
+    @Override
+    public Double estoqueImobilizado() {
+        logger.info(">>>>>> servico imobilizado =>" + produtoRepository.calcularTotalCustoQuantidade());
+        return produtoRepository.calcularTotalCustoQuantidade();
     }
 }
