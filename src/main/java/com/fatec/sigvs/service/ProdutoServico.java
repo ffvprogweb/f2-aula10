@@ -16,8 +16,7 @@ public class ProdutoServico implements IProdutoServico {
     IProdutoRepository produtoRepository;
 
     public List<Produto> consultaProduto() {
-        List<Produto> listaDeProdutos = produtoRepository.findAll();
-        return listaDeProdutos;
+        return produtoRepository.findAll();
     }
 
     @Override
@@ -53,7 +52,7 @@ public class ProdutoServico implements IProdutoServico {
 
     @Override
     public Double estoqueImobilizado() {
-        logger.info(">>>>>> servico imobilizado =>" + produtoRepository.calcularTotalCustoQuantidade());
+        logger.info(">>>>>> servico imobilizado =>");
         return produtoRepository.calcularTotalCustoQuantidade();
     }
 }
