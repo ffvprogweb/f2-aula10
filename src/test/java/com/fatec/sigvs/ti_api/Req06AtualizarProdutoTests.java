@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import com.fatec.sigvs.model.Produto;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class Req06AtualizarProdutoTests {
+class Req06AtualizarProdutoTests {
     String urlBase = "/api/v1/produtos";
     @Autowired
     TestRestTemplate testRestTemplate;
