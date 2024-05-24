@@ -34,7 +34,7 @@ class Req07ExcluirProdutoTests {
         // quando excluo o produto
         ResponseEntity<String> response = testRestTemplate.exchange(urlBase + "/1", HttpMethod.DELETE, null,
                 String.class);
-        // os detalhes do produto ficam disponvieis para consulta
+        // os detalhes do produto nao ficam disponiveis
         assertEquals("200 OK", response.getStatusCode().toString());
         response = testRestTemplate.getForEntity(urlBase + "/1", String.class);
         assertEquals("404 NOT_FOUND", response.getStatusCode().toString());

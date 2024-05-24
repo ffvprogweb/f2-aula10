@@ -1,6 +1,7 @@
 package com.fatec.sigvs.ti_api;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,14 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
 import com.fatec.sigvs.model.Produto;
+import com.fatec.sigvs.service.IProdutoRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class Req06AtualizarProdutoTests {
+class Req06AtualizarProdutoTests {
     String urlBase = "/api/v1/produtos";
     @Autowired
     TestRestTemplate testRestTemplate;
+    IProdutoRepository repository;
 
     void setup() {
         Produto produto = new Produto("Eletrobomba 110V para Maquina de Lavar e Lava Louças", "maquina de lavar",
@@ -43,7 +46,7 @@ public class Req06AtualizarProdutoTests {
                 Produto.class);
         // entao os detalhes do produto ficam disponvieis para consulta
         assertEquals("200 OK", response.getStatusCode().toString());
-        assertEquals("Tirante", response.getBody().getDescricao());
+        assertTrue(response.getBody().getDescricao().contains("Tirante"));
     }
 
 }

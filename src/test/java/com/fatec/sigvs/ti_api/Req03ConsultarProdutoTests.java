@@ -1,6 +1,7 @@
 package com.fatec.sigvs.ti_api;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +30,19 @@ class Req03ConsultarProdutoTests {
     @Test
     void ct01_quando_consulta_produto_cadastrado_retorna_detalhes_do_produto() {
         // dado que o produto foi cadastrado
-        setup();
+        Produto produto = new Produto("Eletrobomba 110V para Maquina de Lavar e Lava Louças", "maquina de lavar",
+                "51.66",
+                "12");
+
+        ResponseEntity<Produto> result = testRestTemplate.postForEntity(urlBase, produto, Produto.class);
+        assertEquals("201 CREATED", result.getStatusCode().toString());
+        System.out.println(result.getBody().toString());
+
         // quando consulto o produto
         ResponseEntity<String> response = testRestTemplate.getForEntity(urlBase + "/1", String.class);
         // os detalhes do produto ficam disponvieis para consulta
         assertEquals("200 OK", response.getStatusCode().toString());
+        assertTrue(response.getBody().contains("Eletrobomba 110V para Maquina de Lavar e Lava Louças"));
 
     }
 }
