@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class SigvsApplication {
-
+	// sistema integrado de gestao
 	public static void main(String[] args) {
 		SpringApplication.run(SigvsApplication.class, args);
 	}
